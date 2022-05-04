@@ -13,22 +13,27 @@ from "@material-ui/icons";
 import DonutLargeIcon from "@material-ui/icons/DonutLarge";
 import ChatIcon from "@material-ui/icons/Chat";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
-
+import db from "./firebase";
 import "./Sidebar.css";
 
 function Sidebar() {
     const [rooms, setRooms] = useState([]);
 
     useEffect(() => {
+        const unsubscribe = db.collection("root")
         db.collection('rooms').onSnapshot(snapshot => (
             setRooms(snapshot.docs.map((doc) => 
             ({
                 id: doc.id,
                 data: doc.data(),
-            })
-            ))
-        ))
-    }, [])
+            }))
+        )))
+
+        return () => {
+            unsubscribe();
+        }
+    }, []);
+
   return (
     <div className="sidebar">
         <div className="sidebar__header">
