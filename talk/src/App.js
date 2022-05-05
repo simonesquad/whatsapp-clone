@@ -1,19 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useStateValue } from "./StateProvider";
 import Sidebar from "./Sidebar";
 import Chat from "./Chat";
+import Login from "./Login";
 import './App.css';
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [{ user }, dispatch] = useStateValue();
 
 
   return (
     // BEM naming convention used here*
     <div className="app">
-
       {!user ? (
-        <h1>Login</h1>
+        <Login />
       ) : (
       <div className="app__body">
 
