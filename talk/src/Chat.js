@@ -31,7 +31,8 @@ function Chat() {
     useEffect(() => {
         if (roomId) {
             db.collection('rooms')
-                .doc(roomId).onSnapshot(snapshot => (
+                .doc(roomId)
+                .onSnapshot(snapshot =>
                 setRoomName(snapshot.data().name));
 
             db.collection("rooms")
